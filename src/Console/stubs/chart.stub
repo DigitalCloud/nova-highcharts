@@ -7,8 +7,10 @@ use Digitalcloud\NovaHighcharts\Chart;
 
 class DummyClass extends Chart
 {
+    private $type;
+
     /**
-     * Calculate the value of the metric.
+     * Calculate the series of the chart metric.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
@@ -19,7 +21,7 @@ class DummyClass extends Chart
     }
 
     /**
-     * Determine for how many minutes the metric should be cached.
+     * Determine for how many minutes the chart metric should be cached.
      *
      * @return  \DateTimeInterface|\DateInterval|float|int
      */
@@ -29,7 +31,7 @@ class DummyClass extends Chart
     }
 
     /**
-     * Get the URI key for the metric.
+     * Get the URI key for the chart metric.
      *
      * @return string
      */

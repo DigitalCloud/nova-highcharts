@@ -15,7 +15,7 @@ abstract class Chart extends Metric
 {
     private $chart;
     public $component = "nova-highcharts";
-    public $height = "450px";
+    public $height = "400px";
     public $width = "full";
     public $ranges = [];
     public $type;
@@ -40,16 +40,26 @@ abstract class Chart extends Metric
     }
 
     /**
-     * chart type ex(column, line, pie) chart
      * @param string $type
      * @return $this
      */
     public function setType(string $type)
     {
-        $this->chart->chart([
+        $this->chart->chart(array_merge($this->chart->chart, [
             "type" => $type,
-            "renderTo" => 'container',//$this->uriKey()
-        ]);
+            "renderTo" => $this->uriKey()
+        ]));
+
+        return $this;
+    }
+
+    /**
+     * @param $chart
+     * @return $this
+     */
+    public function setChart($chart)
+    {
+        $this->chart->chart(array_merge($this->chart->chart, $chart));
 
         return $this;
     }
@@ -97,17 +107,6 @@ abstract class Chart extends Metric
         $this->chart->xaxis($xAxis);
 
         return $this;
-    }
-
-    /**
-     * @param array $dataSeries
-     * @return HighChart
-     */
-    public function result(array $dataSeries)
-    {
-        $this->chart->series($dataSeries);
-
-        return $this->chart;
     }
 
     /**
@@ -177,6 +176,17 @@ abstract class Chart extends Metric
     }
 
     /**
+     * @param array $others
+     * @return $this
+     */
+    public function others(array $others)
+    {
+        $this->chart->others($others);
+
+        return $this;
+    }
+
+    /**
      * Get the ranges available for the metric.
      *
      * @return array
@@ -184,6 +194,18 @@ abstract class Chart extends Metric
     public function ranges()
     {
         return $this->ranges;
+    }
+
+
+    /**
+     * @param array $dataSeries
+     * @return HighChart
+     */
+    public function result(array $dataSeries)
+    {
+        $this->chart->series($dataSeries);
+
+        return $this->chart;
     }
 
     /**

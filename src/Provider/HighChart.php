@@ -8,7 +8,9 @@
 
 namespace Digitalcloud\NovaHighcharts\Provider;
 
-class HighChart
+use JsonSerializable;
+
+class HighChart implements JsonSerializable
 {
     public $title = [];
     public $subtitle = [];
@@ -21,6 +23,7 @@ class HighChart
     public $colors = [];
     public $credits = [];
     public $tooltip = [];
+    public $others = [];
 
     public function title($title = [])
     {
@@ -43,6 +46,12 @@ class HighChart
     public function xAxis($xAxis = [])
     {
         $this->xAxis = $xAxis;
+        return $this;
+    }
+
+    public function others($others = [])
+    {
+        $this->others = $others;
         return $this;
     }
 
@@ -90,19 +99,22 @@ class HighChart
 
     public function jsonSerialize()
     {
-        return [
-            "chart" => $this,
+        return array_filter([
+            "chart" => $this->chart,
             "title" => $this->title,
             "subtitle" => $this->subtitle,
             "xAxis" => $this->xAxis,
             "yAxis" => $this->yAxis,
+            "series" => $this->series,
             "tooltip" => $this->tooltip,
             "credits" => $this->credits,
             "colors" => $this->colors,
             "legend" => $this->legend,
             "plotOptions" => $this->plotOptions,
-            "series" => $this->series
-        ];
+            "others" => $this->others
+        ], function ($value) {
+            return !is_null($value) && !empty($value);
+        });
     }
 
 }

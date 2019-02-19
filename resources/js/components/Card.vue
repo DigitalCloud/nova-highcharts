@@ -41,7 +41,7 @@
 
         data: () => ({
             loading: true,
-            options: [],
+            options: {},
             title: '',
             selectedRangeKey: null,
         }),
@@ -64,10 +64,8 @@
 
             fetch() {
                 this.loading = true;
-                Minimum(Nova.request().get(this.metricEndpoint, this.metricPayload)).then(
-                    ({data: {options, title}}) => {
-                        this.options = options;
-                        this.title = title;
+                Minimum(Nova.request().get(this.metricEndpoint, this.metricPayload)).then(({data: {value}}) => {
+                        this.options = value;
                         this.loading = false
                     }
                 )
