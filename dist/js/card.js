@@ -425,6 +425,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -447,7 +448,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         selectedRangeKey: function selectedRangeKey(newRange, oldRange) {
             this.reload();
         },
-
         options: function options(newData, oldData) {
             this.reload();
         }
@@ -464,7 +464,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         loadGradient: function loadGradient() {
             if (this.options && this.options.others && this.options.others.gradient) {
-                alert(1);
                 __WEBPACK_IMPORTED_MODULE_0_highcharts___default.a.setOptions({
                     colors: __WEBPACK_IMPORTED_MODULE_0_highcharts___default.a.map(__WEBPACK_IMPORTED_MODULE_0_highcharts___default.a.getOptions().colors, function (color) {
                         return {
